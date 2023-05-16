@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="icon" type="image/x-icon" href="https://icons.iconarchive.com/icons/paomedia/small-n-flat/48/calculator-icon.png">
+    <style>
+        body{
+            background-image:linear-gradient(rgb(220, 156, 156),rgb(114, 212, 202));
+            
+        }
+        .container{
+            border: 1px solid black;
+            width: 400px;
+            height: 500px;
+            background-color: aliceblue;
+           
+            border-radius: 20px;
+            box-shadow: 25px 25px 50px ;
+            margin: 200px auto;
+        }
+        .inp{
+            width: 100%;
+            text-align: center;
+        }
+        #inp{
+            width: 70%;
+            height:40px;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: right;
+           
+        }
+        .numbers{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            margin-left: 20px;
+            
+        }
+       button{
+        height: 50px;
+        width: 60px;
+        margin: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        
+       }
+       button:hover{
+        transform: scale(1.1);
+        border-radius: 5px;
+       }
+       @media (max-width:700px) {
+        #inp{
+            caret-color: transparent;
+        }
+        
+       }
+       
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3 style="text-align: center;">CALCULATOR</h3>
+        <div class="inp">
+            <input type="text"  id="inp"  autofocus>
+
+        </div>
+        <div class="numbers">
+            <button value="c" onclick="appendNumber('(')">(</button>
+            <button value="del" onclick="appendNumber(')')">)</button>
+            <button value="%" onclick="appendNumber('%')">%</button>
+            <button value="/" onclick="appendNumber(/)">/</button>
+            <button value="7" onclick="appendNumber(7)">7</button>
+            <button value="8" onclick="appendNumber(8)">8</button>
+            <button value="9" onclick="appendNumber(9)">9</button>
+            <button value="x" onclick="appendNumber('x')">x</button>
+            <button value="4" onclick="appendNumber(4)">4</button>
+            <button value="5" onclick="appendNumber(5)">5</button>
+            <button value="6" onclick="appendNumber(6)">6</button>
+            <button value="-" onclick="appendNumber('-')">-</button>
+            <button value="1" onclick="appendNumber(1)">1</button>
+            <button value="2" onclick="appendNumber(2)">2</button>
+            <button value="3" onclick="appendNumber(3)">3</button>
+            <button value="+" onclick="appendNumber('+')">+</button>
+            <button value="." onclick="appendNumber('.')">.</button>
+            <button value="0" onclick="appendNumber(0)">0</button>
+            <button value="sqrt" onclick="appendNumber('del')">Del</button>
+            <button value="=" onclick="calc()">=</button>
+
+        </div>
+        <h2 id="error" style="text-align: center;color: red;"></h2>
+
+    </div>
+
+    <script>
+        function appendNumber(str) {
+           
+             if (str=="del"){
+                document.getElementById("inp").value=document.getElementById("inp").value.slice(0,-1)
+
+            }
+            else{
+                document.getElementById("inp").value+=String(str) 
+
+            }
+             
+        }
+
+        function calc(){
+            let inp=document.getElementById("inp").value
+            try{
+                document.getElementById("inp").value=eval(inp)
+                document.getElementById("error").innerHTML=""
+            }
+            catch{
+
+                document.getElementById("error").innerHTML="Invalid Input"
+            }
+        }
+
+        let inputField=document.getElementById("inp");
+        inputField.addEventListener("keydown",function(event){
+
+            if(event.key==="Enter"){
+                event.preventDefault();
+                calc();
+            }
+        })
+
+        
+
+
+    </script>
+    
+</body>
+</html>
